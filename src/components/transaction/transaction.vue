@@ -17,12 +17,12 @@
       <div>
         <label class="form-control w-full max-w-xs">
           <div class="label">
-            <span class="label-text">Username</span>
+            <span class="label-text">Account No.</span>
           </div>
           <input
             type="text"
-            v-model="username"
-            placeholder="Username..."
+            v-model="accountNo"
+            placeholder="Account No..."
             class="input input-bordered w-full max-w-xs rounded-xl"
           />
         </label>
@@ -30,21 +30,48 @@
       <div>
         <label class="form-control w-full max-w-xs">
           <div class="label">
-            <span class="label-text">Role</span>
+            <span class="label-text">Transaction Name</span>
           </div>
-          <select v-model="selectedRole" class="select select-bordered rounded-xl">
-            <option value="">Select role ...</option>
-            <option
-              v-for="roleItem in role"
-              :key="roleItem"
-              :value="roleItem.name"
-            >
-              {{ roleItem.name }}
-            </option>
+          <input
+            type="text"
+            v-model="transactionName"
+            placeholder="Transaction Name..."
+            class="input input-bordered w-full max-w-xs rounded-xl"
+          />
+        </label>
+      </div>
+      <div>
+        <label class="form-control w-full max-w-xs">
+          <div class="label">
+            <span class="label-text">Transaction type</span>
+          </div>
+          <select
+            v-model="selectedTransactionType"
+            class="select select-bordered rounded-xl"
+          >
+            <option value="">Select type ...</option>
+            <option value="Deposit">Deposit</option>
+            <option value="Withdraw">Withdraw</option>
           </select>
         </label>
       </div>
-      
+      <div>
+        <label class="form-control w-full max-w-xs">
+          <div class="label">
+            <span class="label-text">Status</span>
+          </div>
+          <select
+            v-model="selectedStatus"
+            class="select select-bordered rounded-xl"
+          >
+            <option value="">Select Status ...</option>
+            <option value="Pending">Pending</option>
+            <option value="Completed">Completed</option>
+            <option value="Failed">Failed</option>
+          </select>
+        </label>
+      </div>
+
       <div>
         <label class="form-control w-full max-w-xs">
           <div class="label">
@@ -58,7 +85,7 @@
           />
         </label>
       </div>
-      
+
       <div>
         <label class="form-control w-full max-w-xs">
           <div class="label">
@@ -75,29 +102,108 @@
 
       <div class="flex flex-col space-y-2">
         <p class="invisible">place</p>
-        <font-awesome-icon :icon="['fas', 'magnifying-glass']" class="btn rounded-full w-5 h-5 bg-sky-500 text-white"  @click="searchUser"/>
+        <font-awesome-icon
+          :icon="['fas', 'magnifying-glass']"
+          class="btn rounded-full w-5 h-5 bg-sky-500 text-white"
+          @click="searchTransaction"
+        />
       </div>
     </div>
-    <table>
-      <thead>
+
+    <table class="table">
+      <thead class="bg-gray-200 rounded-lg">
         <tr>
-          <th>Name</th>
-          <th>Username</th>
-          <th>Password</th>
-          <th>Role</th>
-          <th><CreateUserModal /></th>
+          <th>
+            <div class="flex justify-center items-center">Account No.</div>
+          </th>
+          <th><div class="flex justify-center items-center">Name</div></th>
+          <th>
+            <div class="flex justify-center items-center">Transaction Name</div>
+          </th>
+          <th>
+            <div class="flex justify-center items-center">Transaction Type</div>
+          </th>
+          <th>
+            <div class="flex justify-center items-center">
+              Balance before transaction
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-center items-center">
+              Balance after transaction
+            </div>
+          </th>
+          <th><div class="flex justify-center items-center">Amount</div></th>
+          <th><div class="flex justify-center items-center">Status</div></th>
+          <th>
+            <div class="flex justify-center items-center">Create Date</div>
+          </th>
+          <th>
+            <div class="flex justify-center items-center">
+              <CreateTransactionModal />
+            </div>
+          </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in users" :key="user.id">
-          <td>{{ user.name }}</td>
-          <td>{{ user.userName }}</td>
-          <td>{{ user.password }}</td>
-          <td>{{ user.role.name }}</td>
+        <tr v-for="transaction in transactions" :key="transaction.id">
           <td>
-            <!-- <button @click="editUser(user)">Edit</button> -->
-            <UpdateUserModal :user="user" />
-            <button @click="deleteUser(user.id)">Delete</button>
+            <div class="flex justify-center items-center">
+              {{ transaction.accountNo }}
+            </div>
+          </td>
+          <td>
+            <div class="flex justify-center items-center">
+              {{ transaction.name }}
+            </div>
+          </td>
+          <td>
+            <div class="flex justify-center items-center">
+              {{ transaction.transactionName }}
+            </div>
+          </td>
+          <td>
+            <div class="flex justify-center items-center">
+              {{ transaction.transactionType }}
+            </div>
+          </td>
+          <td>
+            <div class="flex justify-center items-center">
+              {{ transaction.totalBeforeTransaction }}
+            </div>
+          </td>
+          <td>
+            <div class="flex justify-center items-center">
+              {{ transaction.totalAfterTransaction }}
+            </div>
+          </td>
+          <td>
+            <div class="flex justify-center items-center">
+              {{ transaction.amount }}
+            </div>
+          </td>
+          <td>
+            <div class="flex justify-center items-center">
+              {{ transaction.status }}
+            </div>
+          </td>
+          <td>
+            <div class="flex justify-center items-center">
+              {{ transaction.createDate }}
+            </div>
+          </td>
+          <td>
+            <div
+              class="flex flex-row space-x-5 items-center w-full justify-center"
+            >
+              <UpdateTransactionModal :transaction="transaction" />
+              <!-- <button @click="deleteUser(user.id)">Delete</button> -->
+              <font-awesome-icon
+                :icon="['fas', 'trash']"
+                @click="deleteTransaction(transaction.id)"
+                class="btn rounded-full w-5 h-5 bg-red-500 text-white"
+              />
+            </div>
           </td>
         </tr>
       </tbody>
@@ -108,69 +214,50 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useUserStore } from "../../stores/user";
+import { useTransactionStore } from "../../stores/transaction";
 import { useRoleStore } from "../../stores/role";
-import CreateUserModal from "./create.vue";
-import UpdateUserModal from "./edit.vue";
+import CreateTransactionModal from "./create.vue";
+import UpdateTransactionModal from "./edit.vue";
 import Swal from "sweetalert2";
 
 const userStore = useUserStore();
+const transactionStore = useTransactionStore();
 const roleStore = useRoleStore();
 
 const name = ref("");
-const username = ref("");
-const role = ref("");
+const accountNo = ref("");
+const transactionName = ref("");
+const selectedStatus = ref("");
+const selectedTransactionType = ref("");
 const datefrom = ref("");
 const dateto = ref("");
-const selectedRole = ref("");
 
-const users = ref([]);
+const transactions = ref([]);
 
 onMounted(async () => {
-  await roleStore.getRoles();
-  role.value = roleStore.roles;
-
-  searchUser();
+  searchTransaction();
 });
 
-const getRoles = async () => {
-  console.log("Get roles");
-  const roleList = await userStore.getRoles();
-  role.value = roleList.data;
-};
-
-const searchUser = async () => {
-  console.log("Search user with selectedRole:", selectedRole.value);
-  console.log("Search datefrom:", datefrom.value);
-  console.log("Search dateto:", dateto.value);
-
+const searchTransaction = async () => {
   const searchbody = {
     name: name.value,
-    userName: username.value,
-    roleName: selectedRole.value,
-    fromDate: datefrom.value == '' ? null : datefrom.value,
-    toDate: dateto.value == '' ? null : dateto.value,
+    accountNo: accountNo.value,
+    transactionName: transactionName.value,
+    transactionType: selectedTransactionType.value,
+    status: selectedStatus.value,
+    fromDate: datefrom.value == "" ? null : datefrom.value,
+    toDate: dateto.value == "" ? null : dateto.value,
   };
   console.log(searchbody);
-  var user = await userStore.searchUser(searchbody);
-  console.log(user);
-  if (user.status == 200) {
-    users.value = user.data;
+  var transaction = await transactionStore.searchTransaction(searchbody);
+  console.log(transaction);
+  if (transaction.status == 200) {
+    transactions.value = transaction.data;
   }
-  // Handle search user logic here
 };
 
-const addUser = async () => {
-  console.log("Add user");
-  // Handle add user logic here
-};
-
-const editUser = async (user) => {
-  console.log("Edit user:", user);
-  // Handle edit user logic here
-};
-
-const deleteUser = async (userId) => {
-  console.log("Delete user with ID:", userId);
+const deleteTransaction = async (transactionId) => {
+  console.log("Delete transactionId with ID:", transactionId);
 
   Swal.fire({
     title: "Are you sure?",
@@ -181,11 +268,11 @@ const deleteUser = async (userId) => {
     cancelButtonText: "No, cancel!",
   }).then(async (result) => {
     if (result.isConfirmed) {
-      var user = await userStore.deleteUser(userId);
+      var user = await transactionStore.deleteTransaction(transactionId);
       console.log(user);
       if (user.status == 200) {
-        Swal.fire("Deleted!", "User has been deleted.", "success");
-        searchUser();
+        Swal.fire("Deleted!", "Transaction has been deleted.", "success");
+        searchTransaction();
       }
     } else {
       console.log("Delete canceled");

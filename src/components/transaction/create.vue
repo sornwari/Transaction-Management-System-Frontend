@@ -1,81 +1,100 @@
 <template>
   <div>
-    <button class="btn" @click="showModal()">open modal</button>
+    <!-- <button class="btn" @click="showModal()">open modal</button> -->
+    <font-awesome-icon
+      :icon="['fas', 'plus']"
+      class="btn rounded-full w-5 h-5 text-white bg-green-500"
+      @click="showModal()"
+    />
     <dialog ref="myModal" class="modal">
       <div class="modal-box">
-        <div>
-          <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text">Name</span>
-            </div>
-            <input
-              type="text"
-              v-model="name"
-              placeholder="Name..."
-              class="input input-bordered w-full max-w-xs"
-            />
-          </label>
-        </div>
-        <div>
-          <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text">username</span>
-            </div>
-            <input
-              type="text"
-              v-model="username"
-              placeholder="Name..."
-              class="input input-bordered w-full max-w-xs"
-            />
-          </label>
-        </div>
-        <div>
-          <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text">password</span>
-            </div>
-            <input
-              type="text"
-              v-model="password"
-              placeholder="Name..."
-              class="input input-bordered w-full max-w-xs"
-            />
-          </label>
-        </div>
-        <!-- <div>
-          <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text">Role</span>
-            </div>
-            <input
-              type="text"
-              v-model="role"
-              placeholder="Name..."
-              class="input input-bordered w-full max-w-xs"
-            />
-          </label>
-        </div> -->
-        
-      <div>
-        <label class="form-control w-full max-w-xs">
-          <div class="label">
-            <span class="label-text">Role</span>
+        <div class="flex flex-col items-center justify-center">
+          <div>
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Account No</span>
+              </div>
+              <input
+                type="text"
+                v-model="accountNo"
+                placeholder="Account No..."
+                class="input input-bordered w-full max-w-xs rounded-xl"
+              />
+            </label>
           </div>
-          <select v-model="selectedRole" class="select select-bordered">
-            <option value="">Select role ...</option>
-            <option
-              v-for="roleItem in role"
-              :key="roleItem"
-              :value="roleItem.id"
-            >
-              {{ roleItem.name }}
-            </option>
-          </select>
-        </label>
-      </div>
-        <div>
-          <button class="btn" @click="handleSubmit">Save</button>
-          <button class="btn" @click="closeModal">Close</button>
+          <div>
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Transaction Name</span>
+              </div>
+              <input
+                type="text"
+                v-model="transactionName"
+                placeholder="Transaction Name..."
+                class="input input-bordered w-full max-w-xs rounded-xl"
+              />
+            </label>
+          </div>
+          <div>
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Amount</span>
+              </div>
+              <input
+                type="text"
+                v-model="amount"
+                placeholder="Amount..."
+                class="input input-bordered w-full max-w-xs rounded-xl"
+              />
+            </label>
+          </div>
+
+          <div>
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Transaction type</span>
+              </div>
+              <select
+                v-model="transactionType"
+                class="select select-bordered rounded-xl"
+              >
+                <option value="">Select type ...</option>
+                <option value="Deposit">Deposit</option>
+                <option value="Withdraw">Withdraw</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Status</span>
+              </div>
+              <select
+                v-model="status"
+                class="select select-bordered rounded-xl"
+              >
+                <option value="">Select Status ...</option>
+                <option value="Pending">Pending</option>
+                <option value="Completed">Completed</option>
+                <option value="Failed">Failed</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="pt-5">
+            <font-awesome-icon
+              :icon="['fas', 'floppy-disk']"
+              @click="handleSubmit"
+              class="btn rounded-full w-5 h-5 text-white bg-blue-500"
+            />
+            <font-awesome-icon
+              :icon="['fas', 'xmark']"
+              @click="closeModal"
+              class="btn rounded-full w-5 h-5 text-white bg-red-500"
+            />
+            <!-- <button class="btn" @click="handleSubmit">Save</button> -->
+            <!-- <button class="btn" @click="closeModal">Close</button> -->
+          </div>
         </div>
       </div>
     </dialog>
@@ -86,25 +105,24 @@
 import Swal from "sweetalert2";
 import { onMounted, ref } from "vue";
 import { useAuthStore } from "../../stores/auth";
+import { useTransactionStore } from "../../stores/transaction";
 import { useRoleStore } from "../../stores/role";
 import { useUserStore } from "../../stores/user";
 
 const userStore = useUserStore();
+const transactionStore = useTransactionStore();
 const authStore = useAuthStore();
 const roleStore = useRoleStore();
 
 const myModal = ref(null);
 
-const name = ref(null);
-const username = ref(null);
-const password = ref(null);
-const role = ref([]);
-const selectedRole = ref("");
+const accountNo = ref("");
+const transactionName = ref("");
+const transactionType = ref("");
+const amount = ref(0);
+const status = ref("");
 
-onMounted(async () => {
-  await roleStore.getRoles();
-  role.value = roleStore.roles;
-});
+onMounted(async () => {});
 
 const showModal = () => {
   console.log("Show modal");
@@ -116,14 +134,12 @@ const closeModal = () => {
 };
 
 const handleSubmit = async () => {
-  console.log("Name:", name.value);
-  console.log("Name:", authStore.name);
-
-  var response = await userStore.createUser({
-    name: name.value,
-    userName: username.value,
-    password: password.value,
-    roleId: selectedRole.value,
+  var response = await transactionStore.createTransaction({
+    accountNo: accountNo.value,
+    transactionName: transactionName.value,
+    transactionType: transactionType.value,
+    amount: amount.value,
+    status: status.value,
     createBy: authStore.name,
   });
   console.log(response);
