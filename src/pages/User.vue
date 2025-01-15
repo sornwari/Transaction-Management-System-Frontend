@@ -1,13 +1,12 @@
 <template>
   <div class="user-page">
     <h4>User Page</h4>
-    <Settings/>
+    <settings/>
   </div>
 </template>
 
-<script>
-import Settings from '@/components/setting/Setting.vue';
-
+<script setup>
+import settings from '@/components/setting/setting.vue';
 
 </script>
 

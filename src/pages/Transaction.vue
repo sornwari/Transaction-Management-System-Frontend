@@ -1,14 +1,12 @@
 <template>
   <div class="transaction-page">
-    <h1>transaction Page</h1>
-    <p>Welcome to the transaction page!</p>
+    <transaction/>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'TransactionPage'
-};
+<script setup>
+import transaction from './../components/transaction/transaction.vue';
+
 </script>
 
 <style scoped>

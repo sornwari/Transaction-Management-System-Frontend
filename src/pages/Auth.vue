@@ -14,7 +14,7 @@
 
 <script>
 import { onMounted, ref } from 'vue';
-import { useAuthStore } from "./../stores/auth";
+import { useAuthStore } from "../stores/auth";
 import { useRouter } from "vue-router";
 
 export default {
@@ -24,9 +24,6 @@ export default {
     const username = ref('');
     const password = ref('');
 
-    onMounted(() => {
-      console.log('asdasd:', import.meta.env.VITE_APP_API_URL);
-    });
     const login = async () => {
       console.log('Username:', username.value);
       console.log('Password:', password.value);

@@ -1,12 +1,12 @@
 <template>
   <div class="sidebar">
-    <div class="sidebar-item" @click="navigateTo('user')">
-      <i class="fas fa-user"></i>
-      <span>User Page</span>
-    </div>
     <div class="sidebar-item" @click="navigateTo('transaction')">
       <i class="fas fa-exchange-alt"></i>
       <span>Transaction Page</span>
+    </div>
+    <div class="sidebar-item" @click="navigateTo('user')">
+      <i class="fas fa-user"></i>
+      <span>User Page</span>
     </div>
   </div>
 </template>
