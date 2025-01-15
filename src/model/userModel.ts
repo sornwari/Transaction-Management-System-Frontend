@@ -1,4 +1,5 @@
 export interface SearchUserModel {
+  userId: number;
   name: string;
   userName: string;
   roleName: string;

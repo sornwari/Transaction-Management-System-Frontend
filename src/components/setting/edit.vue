@@ -13,7 +13,7 @@
               type="text"
               v-model="name"
               placeholder="Name..."
-              class="input input-bordered w-full max-w-xs"
+              class="input input-bordered w-full max-w-xs rounded-xl"
             />
           </label>
         </div>
@@ -26,7 +26,7 @@
               type="text"
               v-model="username"
               placeholder="Name..."
-              class="input input-bordered w-full max-w-xs"
+              class="input input-bordered w-full max-w-xs rounded-xl"
             />
           </label>
         </div>
@@ -39,7 +39,7 @@
               type="text"
               v-model="password"
               placeholder="Name..."
-              class="input input-bordered w-full max-w-xs"
+              class="input input-bordered w-full max-w-xs rounded-xl"
             />
           </label>
         </div>
@@ -61,7 +61,7 @@
           <div class="label">
             <span class="label-text">Role</span>
           </div>
-          <select v-model="selectedRole" class="select select-bordered">
+          <select v-model="selectedRole" class="select select-bordered rounded-xl">
             <option value="">Select role ...</option>
             <option
               v-for="roleItem in role"

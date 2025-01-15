@@ -12,12 +12,12 @@
           <div>
             <label class="form-control w-full max-w-xs">
               <div class="label">
-                <span class="label-text">Name</span>
+                <span class="label-text">Account No.</span>
               </div>
               <input
                 type="text"
-                v-model="name"
-                placeholder="Name..."
+                v-model="accountNo"
+                placeholder="Account No..."
                 class="input input-bordered w-full max-w-xs rounded-xl"
               />
             </label>
@@ -25,46 +25,17 @@
           <div>
             <label class="form-control w-full max-w-xs">
               <div class="label">
-                <span class="label-text">username</span>
+                <span class="label-text">User Id</span>
               </div>
               <input
                 type="text"
-                v-model="username"
-                placeholder="Name..."
+                v-model="userId"
+                placeholder="User Id..."
                 class="input input-bordered w-full max-w-xs rounded-xl"
               />
             </label>
           </div>
-          <div>
-            <label class="form-control w-full max-w-xs">
-              <div class="label">
-                <span class="label-text">password</span>
-              </div>
-              <input
-                type="text"
-                v-model="password"
-                placeholder="Name..."
-                class="input input-bordered w-full max-w-xs rounded-xl"
-              />
-            </label>
-          </div>
-          <div>
-            <label class="form-control w-full max-w-xs">
-              <div class="label">
-                <span class="label-text">Role</span>
-              </div>
-              <select v-model="selectedRole" class="select select-bordered rounded-xl">
-                <option value="">Select role ...</option>
-                <option
-                  v-for="roleItem in role"
-                  :key="roleItem"
-                  :value="roleItem.id"
-                >
-                  {{ roleItem.name }}
-                </option>
-              </select>
-            </label>
-          </div>
+          
       <div class="pt-5">
         <font-awesome-icon
           :icon="['fas', 'floppy-disk']"
@@ -89,25 +60,22 @@
 <script setup lang="ts">
 import Swal from "sweetalert2";
 import { onMounted, ref } from "vue";
+import { useAccountStore } from "../../stores/account";
 import { useAuthStore } from "../../stores/auth";
 import { useRoleStore } from "../../stores/role";
 import { useUserStore } from "../../stores/user";
 
 const userStore = useUserStore();
+const accountStore = useAccountStore();
 const authStore = useAuthStore();
 const roleStore = useRoleStore();
 
 const myModal = ref(null);
 
-const name = ref(null);
-const username = ref(null);
-const password = ref(null);
-const role = ref([]);
-const selectedRole = ref("");
+const accountNo = ref("");
+const userId = ref(0);
 
 onMounted(async () => {
-  await roleStore.getRoles();
-  role.value = roleStore.roles;
 });
 
 const showModal = () => {
@@ -120,14 +88,12 @@ const closeModal = () => {
 };
 
 const handleSubmit = async () => {
-  console.log("Name:", name.value);
+  console.log("Name:", accountNo.value);
   console.log("Name:", authStore.name);
 
-  var response = await userStore.createUser({
-    name: name.value,
-    userName: username.value,
-    password: password.value,
-    roleId: selectedRole.value,
+  var response = await accountStore.createAccount({
+    accountNo: accountNo.value,
+    userId: userId.value,
     createBy: authStore.name,
   });
   console.log(response);

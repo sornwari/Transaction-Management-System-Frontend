@@ -4,6 +4,19 @@
       <div>
         <label class="form-control w-full max-w-xs ">
           <div class="label">
+            <span class="label-text">User Id</span>
+          </div>
+          <input
+            type="number"
+            v-model="userId"
+            placeholder="Id..."
+            class="input input-bordered w-full max-w-xs rounded-xl"
+          />
+        </label>
+      </div>
+      <div>
+        <label class="form-control w-full max-w-xs ">
+          <div class="label">
             <span class="label-text">Name</span>
           </div>
           <input
@@ -45,34 +58,6 @@
         </label>
       </div>
       
-      <!-- <div>
-        <label class="form-control w-full max-w-xs">
-          <div class="label">
-            <span class="label-text">Date From</span>
-          </div>
-          <input
-            type="date"
-            v-model="datefrom"
-            placeholder="Name..."
-            class="input input-bordered w-full max-w-xs"
-          />
-        </label>
-      </div>
-      
-      <div>
-        <label class="form-control w-full max-w-xs">
-          <div class="label">
-            <span class="label-text">Date To</span>
-          </div>
-          <input
-            type="date"
-            v-model="dateto"
-            placeholder="Name..."
-            class="input input-bordered w-full max-w-xs"
-          />
-        </label>
-      </div> -->
-
       <div class="flex flex-col space-y-2">
         <p class="invisible">place</p>
         <font-awesome-icon :icon="['fas', 'magnifying-glass']" class="btn rounded-full w-5 h-5 bg-sky-500 text-white"  @click="searchUser"/>
@@ -82,6 +67,7 @@
     <table class="table">
       <thead class="bg-gray-200 rounded-lg">
         <tr>
+          <th><div class="flex justify-center items-center">User Id</div></th>
           <th><div class="flex justify-center items-center">Name</div></th>
           <th><div class="flex justify-center items-center">Username</div></th>
           <th><div class="flex justify-center items-center">Password</div></th>
@@ -91,6 +77,7 @@
       </thead>
       <tbody>
         <tr v-for="user in users" :key="user.id">
+          <td><div class="flex justify-center items-center">{{ user.id }}</div></td>
           <td><div class="flex justify-center items-center">{{ user.name }}</div></td>
           <td><div class="flex justify-center items-center">{{ user.userName }}</div></td>
           <td><div class="flex justify-center items-center">{{ user.password }}</div></td>
@@ -120,6 +107,7 @@ import Swal from "sweetalert2";
 const userStore = useUserStore();
 const roleStore = useRoleStore();
 
+const userId = ref(0);
 const name = ref("");
 const username = ref("");
 const role = ref("");
@@ -136,18 +124,10 @@ onMounted(async () => {
   searchUser();
 });
 
-const getRoles = async () => {
-  console.log("Get roles");
-  const roleList = await userStore.getRoles();
-  role.value = roleList.data;
-};
 
 const searchUser = async () => {
-  console.log("Search user with selectedRole:", selectedRole.value);
-  console.log("Search datefrom:", datefrom.value);
-  console.log("Search dateto:", dateto.value);
-
   const searchbody = {
+    userId: userId.value,
     name: name.value,
     userName: username.value,
     roleName: selectedRole.value,
@@ -160,17 +140,6 @@ const searchUser = async () => {
   if (user.status == 200) {
     users.value = user.data;
   }
-  // Handle search user logic here
-};
-
-const addUser = async () => {
-  console.log("Add user");
-  // Handle add user logic here
-};
-
-const editUser = async (user) => {
-  console.log("Edit user:", user);
-  // Handle edit user logic here
 };
 
 const deleteUser = async (userId) => {

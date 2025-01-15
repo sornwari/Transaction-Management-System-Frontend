@@ -1,5 +1,6 @@
 <template>
   <div class="transaction-page">
+    <h4>Transaction Page</h4>
     <transaction/>
   </div>
 </template>

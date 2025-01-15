@@ -2,10 +2,11 @@ import { createWebHistory, createRouter } from "vue-router";
 // import Main from "@/pages/main.vue";
 // import Customer from "@/pages/customer.vue";
 // import Setting from "@/pages/setting.vue";
-import Auth from "./../pages/auth.vue";
-import Main from "./../pages/main.vue";
-import User from "./../pages/user.vue";
-import Transaction from "./../pages/transaction.vue";
+import Auth from "./../pages/Auth.vue";
+import Main from "./../pages/Main.vue";
+import User from "./../pages/User.vue";
+import Transaction from "./../pages/Transaction.vue";
+import Account from "./../pages/Account.vue";
 
 const routes = [
   {
@@ -20,6 +21,11 @@ const routes = [
         path: "/user",
         name: "user",
         component: User,
+      },
+      {
+        path: "/account",
+        name: "account",
+        component: Account,
       },
       {
         path: "/transaction",
