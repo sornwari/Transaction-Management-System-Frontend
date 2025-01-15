@@ -18,14 +18,14 @@
       </div>
       <ul
         tabindex="0"
-        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+        class="menu menu-sm dropdown-content bg-sky-300 rounded-box z-[1] mt-3 w-52 p-2 shadow">
         <!-- <li>
           <a class="justify-between">
             Profile
           </a>
         </li>
         <li><a>Settings</a></li> -->
-        <li><a @click="logout">Logout</a></li>
+        <li><a @click="logout"><div class="text-black">Logout</div></a></li>
       </ul>
     </div>
   </div>

@@ -62,6 +62,10 @@
         <p class="invisible">place</p>
         <font-awesome-icon :icon="['fas', 'magnifying-glass']" class="btn rounded-full w-5 h-5 bg-sky-500 text-white"  @click="searchUser"/>
       </div>
+      <div class="flex flex-col space-y-2">
+        <p class="invisible">place</p>
+        <font-awesome-icon :icon="['fas', 'file-export']" class="btn rounded-full w-5 h-5 bg-pink-500 text-white"  @click="searchUser"/>
+      </div>
     </div>
 
     <table class="table">
