@@ -25,15 +25,21 @@
           </a>
         </li>
         <li><a>Settings</a></li> -->
-        <li><a>Logout</a></li>
+        <li><a @click="logout">Logout</a></li>
       </ul>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: "Topbar",
+<script setup>
+import Cookies from "js-cookie";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const logout = () => {
+  console.log("Logout");
+  Cookies.remove("auth-token");
+  router.push("/");
 };
 </script>
 

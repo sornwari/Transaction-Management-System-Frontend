@@ -1,7 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router";
-// import Main from "@/pages/main.vue";
-// import Customer from "@/pages/customer.vue";
-// import Setting from "@/pages/setting.vue";
+import Cookies from "js-cookie";
 import Auth from "./../pages/Auth.vue";
 import Main from "./../pages/Main.vue";
 import User from "./../pages/User.vue";
@@ -39,6 +37,20 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach(async (to, from, next) => {
+  const cookie = Cookies.get("auth-token");
+  console.log("cookie : ", cookie);
+  console.log("to.path : ", to.path);
+
+  if (to.path !== "/" && cookie == undefined) {
+    console.log("to.path !== '/' && !currentUserId");
+    next("/");
+  } else {
+    console.log("else && currentUserId == ", cookie);
+    next();
+  }
 });
 
 export default router;
