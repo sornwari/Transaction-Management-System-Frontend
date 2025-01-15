@@ -1,83 +1,87 @@
 <template>
   <div>
-    <button class="btn" @click="showModal()">open modal</button>
+    <!-- <button class="btn" @click="showModal()">open modal</button> -->
+    <font-awesome-icon
+      :icon="['fas', 'plus']"
+      class="btn rounded-full w-5 h-5 text-white bg-green-500"
+      @click="showModal()"
+    />
     <dialog ref="myModal" class="modal">
       <div class="modal-box">
-        <div>
-          <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text">Name</span>
-            </div>
-            <input
-              type="text"
-              v-model="name"
-              placeholder="Name..."
-              class="input input-bordered w-full max-w-xs"
-            />
-          </label>
-        </div>
-        <div>
-          <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text">username</span>
-            </div>
-            <input
-              type="text"
-              v-model="username"
-              placeholder="Name..."
-              class="input input-bordered w-full max-w-xs"
-            />
-          </label>
-        </div>
-        <div>
-          <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text">password</span>
-            </div>
-            <input
-              type="text"
-              v-model="password"
-              placeholder="Name..."
-              class="input input-bordered w-full max-w-xs"
-            />
-          </label>
-        </div>
-        <!-- <div>
-          <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text">Role</span>
-            </div>
-            <input
-              type="text"
-              v-model="role"
-              placeholder="Name..."
-              class="input input-bordered w-full max-w-xs"
-            />
-          </label>
-        </div> -->
-        
-      <div>
-        <label class="form-control w-full max-w-xs">
-          <div class="label">
-            <span class="label-text">Role</span>
+        <div class="flex flex-col items-center justify-center">
+          <div>
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Name</span>
+              </div>
+              <input
+                type="text"
+                v-model="name"
+                placeholder="Name..."
+                class="input input-bordered w-full max-w-xs"
+              />
+            </label>
           </div>
-          <select v-model="selectedRole" class="select select-bordered">
-            <option value="">Select role ...</option>
-            <option
-              v-for="roleItem in role"
-              :key="roleItem"
-              :value="roleItem.id"
-            >
-              {{ roleItem.name }}
-            </option>
-          </select>
-        </label>
+          <div>
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">username</span>
+              </div>
+              <input
+                type="text"
+                v-model="username"
+                placeholder="Name..."
+                class="input input-bordered w-full max-w-xs"
+              />
+            </label>
+          </div>
+          <div>
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">password</span>
+              </div>
+              <input
+                type="text"
+                v-model="password"
+                placeholder="Name..."
+                class="input input-bordered w-full max-w-xs"
+              />
+            </label>
+          </div>
+          <div>
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Role</span>
+              </div>
+              <select v-model="selectedRole" class="select select-bordered">
+                <option value="">Select role ...</option>
+                <option
+                  v-for="roleItem in role"
+                  :key="roleItem"
+                  :value="roleItem.id"
+                >
+                  {{ roleItem.name }}
+                </option>
+              </select>
+            </label>
+          </div>
+      <div class="pt-5">
+        <font-awesome-icon
+          :icon="['fas', 'floppy-disk']"
+          @click="handleSubmit"
+          class="btn rounded-full w-5 h-5 text-white bg-blue-500"
+        />
+        <font-awesome-icon
+          :icon="['fas', 'xmark']"
+          @click="closeModal"
+          class="btn rounded-full w-5 h-5 text-white bg-red-500"
+        />
+        <!-- <button class="btn" @click="handleSubmit">Save</button> -->
+        <!-- <button class="btn" @click="closeModal">Close</button> -->
       </div>
-        <div>
-          <button class="btn" @click="handleSubmit">Save</button>
-          <button class="btn" @click="closeModal">Close</button>
         </div>
       </div>
+
     </dialog>
   </div>
 </template>

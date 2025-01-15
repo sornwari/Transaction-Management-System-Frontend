@@ -1,15 +1,19 @@
 <template>
   <div class="topbar">
     <div class="logo">MyApp</div>
-    <div class="user-icon">
-      <i class="fas fa-user"></i>
+    <div class="avatar pr-3">
+      <div class="w-9 h-9 rounded-full">
+        <img
+          src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Topbar'
+  name: "Topbar",
 };
 </script>
 
@@ -19,7 +23,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 1em;
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
 }
 .logo {

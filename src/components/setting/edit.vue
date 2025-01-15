@@ -1,8 +1,9 @@
 <template>
   <div>
-    <button class="btn" @click="showModal()">edit modal</button>
+    <!-- <button class="btn" @click="showModal()">edit modal</button> -->
+    <font-awesome-icon :icon="['fas', 'pen-to-square']"  @click="showModal()" class="btn rounded-full w-5 h-5 bg-orange-500 text-white"/>
     <dialog ref="myModal" class="modal">
-      <div class="modal-box">
+      <div class="flex flex-col items-center justify-center modal-box">
         <div>
           <label class="form-control w-full max-w-xs">
             <div class="label">
@@ -72,9 +73,12 @@
           </select>
         </label>
       </div>
-        <div>
-          <button class="btn" @click="handleSubmit">Save</button>
-          <button class="btn" @click="closeModal">Close</button>
+        <div class="pt-5">
+          
+          <font-awesome-icon :icon="['fas', 'floppy-disk']"  @click="handleSubmit"  class="btn rounded-full w-5 h-5 text-white bg-blue-500"/>
+          <font-awesome-icon :icon="['fas', 'xmark']"  @click="closeModal"  class="btn rounded-full w-5 h-5 text-white bg-red-500"/>
+          <!-- <button class="btn" @click="handleSubmit">Save</button>
+          <button class="btn" @click="closeModal">Close</button> -->
         </div>
       </div>
     </dialog>

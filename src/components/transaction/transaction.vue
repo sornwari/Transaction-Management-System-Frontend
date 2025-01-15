@@ -1,5 +1,5 @@
 <template>
-  <div class="user-container">
+  <div class="transaction-container w-full px-10">
     <div class="flex flex-row py-4 space-x-5 justify-center items-center">
       <div>
         <label class="form-control w-full max-w-xs">
@@ -10,7 +10,7 @@
             type="text"
             v-model="name"
             placeholder="Name..."
-            class="input input-bordered w-full max-w-xs"
+            class="input input-bordered w-full max-w-xs rounded-xl"
           />
         </label>
       </div>
@@ -23,7 +23,7 @@
             type="text"
             v-model="username"
             placeholder="Username..."
-            class="input input-bordered w-full max-w-xs"
+            class="input input-bordered w-full max-w-xs rounded-xl"
           />
         </label>
       </div>
@@ -32,7 +32,7 @@
           <div class="label">
             <span class="label-text">Role</span>
           </div>
-          <select v-model="selectedRole" class="select select-bordered">
+          <select v-model="selectedRole" class="select select-bordered rounded-xl">
             <option value="">Select role ...</option>
             <option
               v-for="roleItem in role"
@@ -54,7 +54,7 @@
             type="date"
             v-model="datefrom"
             placeholder="Name..."
-            class="input input-bordered w-full max-w-xs"
+            class="input input-bordered w-full max-w-xs rounded-xl"
           />
         </label>
       </div>
@@ -68,14 +68,14 @@
             type="date"
             v-model="dateto"
             placeholder="Name..."
-            class="input input-bordered w-full max-w-xs"
+            class="input input-bordered w-full max-w-xs rounded-xl"
           />
         </label>
       </div>
 
       <div class="flex flex-col space-y-2">
         <p class="invisible">place</p>
-        <button @click="searchUser" class="btn">Search</button>
+        <font-awesome-icon :icon="['fas', 'magnifying-glass']" class="btn rounded-full w-5 h-5 bg-sky-500 text-white"  @click="searchUser"/>
       </div>
     </div>
     <table>
@@ -195,8 +195,7 @@ const deleteUser = async (userId) => {
 </script>
 
 <style scoped>
-.user-container {
-  max-width: 800px;
+.transaction-container {
   margin: 0 auto;
   padding: 1em;
 }

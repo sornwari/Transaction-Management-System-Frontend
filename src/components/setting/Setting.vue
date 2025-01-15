@@ -1,8 +1,8 @@
 <template>
-  <div class="user-container">
+  <div class="user-container w-full px-10">
     <div class="flex flex-row py-4 space-x-5 justify-center items-center">
       <div>
-        <label class="form-control w-full max-w-xs">
+        <label class="form-control w-full max-w-xs ">
           <div class="label">
             <span class="label-text">Name</span>
           </div>
@@ -10,7 +10,7 @@
             type="text"
             v-model="name"
             placeholder="Name..."
-            class="input input-bordered w-full max-w-xs"
+            class="input input-bordered w-full max-w-xs rounded-xl"
           />
         </label>
       </div>
@@ -23,7 +23,7 @@
             type="text"
             v-model="username"
             placeholder="Username..."
-            class="input input-bordered w-full max-w-xs"
+            class="input input-bordered w-full max-w-xs rounded-xl"
           />
         </label>
       </div>
@@ -32,7 +32,7 @@
           <div class="label">
             <span class="label-text">Role</span>
           </div>
-          <select v-model="selectedRole" class="select select-bordered">
+          <select v-model="selectedRole" class="select select-bordered rounded-xl">
             <option value="">Select role ...</option>
             <option
               v-for="roleItem in role"
@@ -45,7 +45,7 @@
         </label>
       </div>
       
-      <div>
+      <!-- <div>
         <label class="form-control w-full max-w-xs">
           <div class="label">
             <span class="label-text">Date From</span>
@@ -71,37 +71,41 @@
             class="input input-bordered w-full max-w-xs"
           />
         </label>
-      </div>
+      </div> -->
 
       <div class="flex flex-col space-y-2">
         <p class="invisible">place</p>
-        <button @click="searchUser" class="btn">Search</button>
+        <font-awesome-icon :icon="['fas', 'magnifying-glass']" class="btn rounded-full w-5 h-5 bg-sky-500 text-white"  @click="searchUser"/>
       </div>
     </div>
-    <table>
-      <thead>
+
+    <table class="table">
+      <thead class="bg-gray-200 rounded-lg">
         <tr>
-          <th>Name</th>
-          <th>Username</th>
-          <th>Password</th>
-          <th>Role</th>
-          <th><CreateUserModal /></th>
+          <th><div class="flex justify-center items-center">Name</div></th>
+          <th><div class="flex justify-center items-center">Username</div></th>
+          <th><div class="flex justify-center items-center">Password</div></th>
+          <th><div class="flex justify-center items-center">Role</div></th>
+          <th><div class="flex justify-center items-center"><CreateUserModal /></div></th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="user in users" :key="user.id">
-          <td>{{ user.name }}</td>
-          <td>{{ user.userName }}</td>
-          <td>{{ user.password }}</td>
-          <td>{{ user.role.name }}</td>
+          <td><div class="flex justify-center items-center">{{ user.name }}</div></td>
+          <td><div class="flex justify-center items-center">{{ user.userName }}</div></td>
+          <td><div class="flex justify-center items-center">{{ user.password }}</div></td>
+          <td><div class="flex justify-center items-center">{{ user.role.name }}</div></td>
           <td>
-            <!-- <button @click="editUser(user)">Edit</button> -->
+            <div class="flex flex-row space-x-5 items-center w-full justify-center">
             <UpdateUserModal :user="user" />
-            <button @click="deleteUser(user.id)">Delete</button>
+            <!-- <button @click="deleteUser(user.id)">Delete</button> -->
+            <font-awesome-icon :icon="['fas', 'trash']"  @click="deleteUser(user.id)" class="btn rounded-full w-5 h-5 bg-red-500 text-white"/>
+            </div>
           </td>
         </tr>
       </tbody>
     </table>
+
   </div>
 </template>
 
@@ -196,7 +200,6 @@ const deleteUser = async (userId) => {
 
 <style scoped>
 .user-container {
-  max-width: 800px;
   margin: 0 auto;
   padding: 1em;
 }
