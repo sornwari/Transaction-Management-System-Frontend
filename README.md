@@ -36,3 +36,7 @@ This is the frontend application for the Transaction Management System. It provi
     ```
 2. Open your browser and navigate to `http://localhost:3001/`.
 
+## Database Diagram
+
+![Database Diagram](src/asset/diagram/db_diagram.png)
+
