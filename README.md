@@ -38,5 +38,5 @@ This is the frontend application for the Transaction Management System. It provi
 
 ## Database Diagram
 
-![Database Diagram](src/asset/diagram/db_diagram.png)
+![Database Diagram](./src/asset/diagram/db_diagram.png)
 
