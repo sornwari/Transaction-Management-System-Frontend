@@ -1,5 +1,9 @@
 <template>
   <div class="sidebar">
+    <div class="sidebar-item" @click="navigateTo('dashboard')">
+      <i class="fas fa-user"></i>
+      <span>Dashboard</span>
+    </div>
     <div class="sidebar-item" @click="navigateTo('user')">
       <i class="fas fa-user"></i>
       <span>User</span>
@@ -35,7 +39,7 @@ export default {
 
 <style scoped>
 .sidebar {
-  width: 200px;
+  width: 130px;
   height: 100vh;
   background-color: #343a40;
   color: white;

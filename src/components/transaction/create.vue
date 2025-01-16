@@ -9,6 +9,9 @@
     <dialog ref="myModal" class="modal">
       <div class="modal-box">
         <div class="flex flex-col items-center justify-center">
+          <div class="text-2xl font-bold mb-5">
+            Create Transaction
+          </div>
           <div>
             <label class="form-control w-full max-w-xs">
               <div class="label">

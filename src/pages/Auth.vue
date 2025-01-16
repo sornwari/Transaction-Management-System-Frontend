@@ -12,14 +12,12 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { onMounted, ref } from 'vue';
 import { useAuthStore } from "../stores/auth";
 import { useRouter } from "vue-router";
 
-export default {
-  setup() {
-    const authStore = useAuthStore();
+const authStore = useAuthStore();
     const router = useRouter();
     const username = ref('');
     const password = ref('');
@@ -34,17 +32,9 @@ export default {
       };
     const res = await authStore.login(loginModel);
     
-    router.push("/home");
-    console.log(res);
+    console.log("asdasdsada:",res);
+    router.push("/dashboard");
     };
-
-    return {
-      username,
-      password,
-      login
-    };
-  }
-};
 </script>
 
 <style scoped>

@@ -12,11 +12,11 @@ class UserService {
   }
 
   updateUser(body: UpdateUserViewModel) {
-    return axiosClient.post(`/User/updateUser`, body);
+    return axiosClient.put(`/User/updateUser`, body);
   }
   
   deleteUser(id: number) {
-    return axiosClient.get(`/User/deleteUser/${id}`);
+    return axiosClient.delete(`/User/deleteUser/${id}`);
   }
 }
 export default new UserService();

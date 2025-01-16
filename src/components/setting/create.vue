@@ -9,6 +9,9 @@
     <dialog ref="myModal" class="modal">
       <div class="modal-box">
         <div class="flex flex-col items-center justify-center">
+          <div class="text-2xl font-bold mb-5">
+            Create User
+          </div>
           <div>
             <label class="form-control w-full max-w-xs">
               <div class="label">
@@ -53,7 +56,7 @@
               <div class="label">
                 <span class="label-text">Role</span>
               </div>
-              <select v-model="selectedRole" class="select select-bordered rounded-xl">
+              <select v-model="selectedRole" class="select select-bordered w-full max-w-xs rounded-xl">
                 <option value="">Select role ...</option>
                 <option
                   v-for="roleItem in role"

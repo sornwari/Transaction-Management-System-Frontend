@@ -14,11 +14,11 @@ class TransactionService {
   }
   
   updateTransactionService(body: UpdateTransactionViewModel) {
-    return axiosClient.post(`/Transaction/updateTransaction`, body);
+    return axiosClient.put(`/Transaction/updateTransaction`, body);
   }
 
   deleteTransactionService(id: number) {
-    return axiosClient.get(`/Transaction/deleteTransaction/${id}`);
+    return axiosClient.delete(`/Transaction/deleteTransaction/${id}`);
   }
 }
 export default new TransactionService();

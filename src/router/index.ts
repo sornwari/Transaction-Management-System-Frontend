@@ -5,29 +5,7 @@ import Main from "./../pages/main.vue";
 import User from "./../pages/user.vue";
 import Transaction from "./../pages/transaction.vue";
 import Account from "./../pages/account.vue";
-
-// const routes = [
-//   {
-//     path: "/",
-//     component: Auth,
-//   },
-//   {
-//     path: "/home",
-//     component: Main,
-//     children: [
-//       {
-//         path: "/user",
-//         name: "user",
-//         component: User,
-//       },
-//       {
-//         path: "/transaction",
-//         name: "transaction",
-//         component: Transaction,
-//       },
-//     ],
-//   },
-// ];
+import Dashboard from "./../pages/dashboard.vue";
 
 const routes = [
   {
@@ -38,6 +16,11 @@ const routes = [
     path: "/home",
     component: Main,
     children: [
+      {
+        path: "/dashboard",
+        name: "dashboard",
+        component: Dashboard,
+      },
       {
         path: "/user",
         name: "user",
@@ -64,14 +47,10 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const cookie = Cookies.get("auth-token");
-  console.log("cookie : ", cookie);
-  console.log("to.path : ", to.path);
 
   if (to.path !== "/" && cookie == undefined) {
-    console.log("to.path !== '/' && !currentUserId");
     next("/");
   } else {
-    console.log("else && currentUserId == ", cookie);
     next();
   }
 });

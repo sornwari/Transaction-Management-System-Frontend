@@ -4,6 +4,9 @@
     <font-awesome-icon :icon="['fas', 'pen-to-square']"  @click="showModal()" class="btn rounded-full w-5 h-5 bg-orange-500 text-white"/>
     <dialog ref="myModal" class="modal">
       <div class="flex flex-col items-center justify-center modal-box">
+          <div class="text-2xl font-bold mb-5">
+            Update User
+          </div>
         <div>
           <label class="form-control w-full max-w-xs">
             <div class="label">

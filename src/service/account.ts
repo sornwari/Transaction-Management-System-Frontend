@@ -13,11 +13,11 @@ class AccountService {
   }
   
   updateAccountService(body: UpdateAccountViewModel) {
-    return axiosClient.post(`/Account/updateAccount`, body);
+    return axiosClient.put(`/Account/updateAccount`, body);
   }
 
   deleteAccountService(id: number) {
-    return axiosClient.get(`/Account/deleteAccount/${id}`);
+    return axiosClient.delete(`/Account/deleteAccount/${id}`);
   }
 }
 export default new AccountService();
