@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import transaction from './../components/transaction/transaction.vue';
+import transaction from '../components/transaction/transaction.vue';
 
 </script>
 

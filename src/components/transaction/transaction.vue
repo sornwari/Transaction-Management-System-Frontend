@@ -110,7 +110,10 @@
       </div>
       <div class="flex flex-col space-y-2">
         <p class="invisible">place</p>
-        <font-awesome-icon :icon="['fas', 'file-export']" class="btn rounded-full w-5 h-5 bg-pink-500 text-white"  @click="searchUser"/>
+        <font-awesome-icon 
+          :icon="['fas', 'file-export']" 
+          class="btn rounded-full w-5 h-5 bg-pink-500 text-white"  
+          @click="getReportTransaction"/>
       </div>
     </div>
 
@@ -219,6 +222,7 @@
 import { onMounted, ref } from "vue";
 import { useUserStore } from "../../stores/user";
 import { useTransactionStore } from "../../stores/transaction";
+import { useReportStore } from "../../stores/report";
 import { useRoleStore } from "../../stores/role";
 import CreateTransactionModal from "./create.vue";
 import UpdateTransactionModal from "./edit.vue";
@@ -226,6 +230,7 @@ import Swal from "sweetalert2";
 
 const userStore = useUserStore();
 const transactionStore = useTransactionStore();
+const reportStore = useReportStore();
 const roleStore = useRoleStore();
 
 const name = ref("");
@@ -259,6 +264,27 @@ const searchTransaction = async () => {
     transactions.value = transaction.data;
   }
 };
+
+const getReportTransaction = async () => {const searchbody = {
+    name: name.value,
+    accountNo: accountNo.value,
+    transactionName: transactionName.value,
+    transactionType: selectedTransactionType.value,
+    status: selectedStatus.value,
+    fromDate: datefrom.value == "" ? null : datefrom.value,
+    toDate: dateto.value == "" ? null : dateto.value,
+  };
+  console.log(searchbody);
+  var transaction = await reportStore.getReportTransaction(searchbody);
+  console.log(transaction);
+  if (transaction.status == 200) {
+    var blob = new Blob([transaction.data], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+    var link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = "report-transaction.xlsx";
+    link.click();
+  }
+}
 
 const deleteTransaction = async (transactionId) => {
   console.log("Delete transactionId with ID:", transactionId);

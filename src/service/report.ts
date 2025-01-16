@@ -5,16 +5,22 @@ import type { SearchUserModel } from "@/model/userModel";
 import { axiosClient } from "@/utils/axiosClient";
 
 class ReportService {
-  searchUsers(body: SearchUserModel) {
-    return axiosClient.post(`/User/searchUser`, body);
+  getReportUsers(body: SearchUserModel) {
+    return axiosClient.post(`/Report/getReportUser`, body, {
+      responseType: "blob",
+    });
   }
 
-  searchAccounts(body: SearchAccountModel) {
-    return axiosClient.post(`/Account/searchAccount`, body);
+  getReportAccounts(body: SearchAccountModel) {
+    return axiosClient.post(`/Report/getReportAccount`, body, {
+      responseType: "blob",
+    });
   }
 
-  searchTransactions(body: SearchTransactionsModel) {
-    return axiosClient.post(`/Transaction/searchTransaction`, body);
+  getReportTransactions(body: SearchTransactionsModel) {
+    return axiosClient.post(`/Report/getReportTransaction`, body, {
+      responseType: "blob",
+    });
   }
 }
 export default new ReportService();

@@ -64,7 +64,7 @@
       </div>
       <div class="flex flex-col space-y-2">
         <p class="invisible">place</p>
-        <font-awesome-icon :icon="['fas', 'file-export']" class="btn rounded-full w-5 h-5 bg-pink-500 text-white"  @click="searchUser"/>
+        <font-awesome-icon :icon="['fas', 'file-export']" class="btn rounded-full w-5 h-5 bg-pink-500 text-white"  @click="getReportUser"/>
       </div>
     </div>
 
@@ -103,12 +103,14 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useUserStore } from "../../stores/user";
+import { useReportStore } from "../../stores/report";
 import { useRoleStore } from "../../stores/role";
 import CreateUserModal from "./create.vue";
 import UpdateUserModal from "./edit.vue";
 import Swal from "sweetalert2";
 
 const userStore = useUserStore();
+const reportStore = useReportStore();
 const roleStore = useRoleStore();
 
 const userId = ref(0);
@@ -145,6 +147,27 @@ const searchUser = async () => {
     users.value = user.data;
   }
 };
+
+const getReportUser = async () => {
+  const searchbody = {
+    userId: userId.value,
+    name: name.value,
+    userName: username.value,
+    roleName: selectedRole.value,
+    fromDate: datefrom.value == '' ? null : datefrom.value,
+    toDate: dateto.value == '' ? null : dateto.value,
+  };
+  console.log(searchbody);
+  var reportUser = await reportStore.getReportUser(searchbody);
+  console.log(reportUser);
+  if (reportUser.status == 200) {
+    var blob = new Blob([reportUser.data], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+    var link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = "report-user.xlsx";
+    link.click();
+  }
+}
 
 const deleteUser = async (userId) => {
   console.log("Delete user with ID:", userId);

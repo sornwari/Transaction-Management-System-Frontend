@@ -34,7 +34,7 @@
       
       <div class="flex flex-col space-y-2">
         <p class="invisible">place</p>
-        <font-awesome-icon :icon="['fas', 'file-export']" class="btn rounded-full w-5 h-5 bg-pink-500 text-white"  @click="searchUser"/>
+        <font-awesome-icon :icon="['fas', 'file-export']" class="btn rounded-full w-5 h-5 bg-pink-500 text-white"  @click="getReportAccount"/>
       </div>
     </div>
 
@@ -73,6 +73,7 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useAccountStore } from "../../stores/account";
+import { useReportStore } from "../../stores/report";
 import { useUserStore } from "../../stores/user";
 import { useRoleStore } from "../../stores/role";
 import CreateAccountModal from "./create.vue";
@@ -82,6 +83,7 @@ import Swal from "sweetalert2";
 const accountStore = useAccountStore();
 const userStore = useUserStore();
 const roleStore = useRoleStore();
+const reportStore = useReportStore();
 
 const accountNo = ref("");
 const name = ref("");
@@ -105,6 +107,22 @@ const searchAccount = async () => {
     accounts.value = account.data;
   }
 };
+
+const getReportAccount = async () => {
+  const searchbody = {
+    accountNo: accountNo.value,
+    name: name.value,
+  };
+  var reportAccount = await reportStore.getReportAccounts(searchbody);
+  console.log(reportAccount);
+  if (reportAccount.status == 200) {
+    var blob = new Blob([reportAccount.data], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+    var link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = "report-account.xlsx";
+    link.click();
+  }
+}
 
 const deleteAccount = async (accountId) => {
   console.log("Delete accountId with ID:", accountId);

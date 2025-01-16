@@ -1,10 +1,33 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Cookies from "js-cookie";
-import Auth from "./../pages/Auth.vue";
-import Main from "./../pages/Main.vue";
-import User from "./../pages/User.vue";
-import Transaction from "./../pages/Transaction.vue";
-import Account from "./../pages/Account.vue";
+import Auth from "./../pages/auth.vue";
+import Main from "./../pages/main.vue";
+import User from "./../pages/user.vue";
+import Transaction from "./../pages/transaction.vue";
+import Account from "./../pages/account.vue";
+
+// const routes = [
+//   {
+//     path: "/",
+//     component: Auth,
+//   },
+//   {
+//     path: "/home",
+//     component: Main,
+//     children: [
+//       {
+//         path: "/user",
+//         name: "user",
+//         component: User,
+//       },
+//       {
+//         path: "/transaction",
+//         name: "transaction",
+//         component: Transaction,
+//       },
+//     ],
+//   },
+// ];
 
 const routes = [
   {
