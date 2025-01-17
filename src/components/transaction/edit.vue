@@ -120,7 +120,7 @@ const transactionStore = useTransactionStore();
 const authStore = useAuthStore();
 const roleStore = useRoleStore();
 
-const myModal = ref(null);
+const myModal = ref<HTMLDialogElement | null>(null);
 
 const accountNo = ref("");
 const transactionName = ref("");
@@ -148,11 +148,17 @@ const showModal = () => {
   amount.value = props.transaction.amount;
   status.value = props.transaction.status;
 
-  myModal.value.show();
+  // myModal.value.show();
+  if (myModal.value) {
+    myModal.value.show();
+  }
 };
 
 const closeModal = () => {
-  myModal.value.close();
+  // myModal.value.close();
+  if (myModal.value) {
+    myModal.value.close();
+  }
 };
 
 const handleSubmit = async () => {

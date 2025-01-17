@@ -14,7 +14,7 @@ export const useAuthStore = defineStore("auth", {
       try {
         const response = await auth.login(body);
         console.log("response", response);
-        if (response.status == 200) {
+        if (response && response.status == 200) {
           const token = response.data.token;
           this.username = response.data.user.userName;
           this.password = response.data.user.password;

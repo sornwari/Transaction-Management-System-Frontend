@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Cookies from "js-cookie";
-import Auth from "./../pages/auth.vue";
+import Auth from "@/pages/Auth.vue";
+// import Auth from "./../pages/auth.vue";
 import Main from "./../pages/main.vue";
 import User from "./../pages/user.vue";
 import Transaction from "./../pages/transaction.vue";

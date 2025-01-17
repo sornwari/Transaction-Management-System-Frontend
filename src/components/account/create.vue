@@ -73,7 +73,7 @@ const accountStore = useAccountStore();
 const authStore = useAuthStore();
 const roleStore = useRoleStore();
 
-const myModal = ref(null);
+const myModal = ref<HTMLDialogElement | null>(null);
 
 const accountNo = ref("");
 const userId = ref(0);
@@ -83,11 +83,16 @@ onMounted(async () => {
 
 const showModal = () => {
   console.log("Show modal");
-  myModal.value.show();
+  if (myModal.value) {
+    myModal.value.show();
+  }
 };
 
 const closeModal = () => {
-  myModal.value.close();
+  // myModal.value.close();
+  if (myModal.value) {
+    myModal.value.close();
+  }
 };
 
 const handleSubmit = async () => {

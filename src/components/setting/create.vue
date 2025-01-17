@@ -60,7 +60,7 @@
                 <option value="">Select role ...</option>
                 <option
                   v-for="roleItem in role"
-                  :key="roleItem"
+                  :key="roleItem.id"
                   :value="roleItem.id"
                 >
                   {{ roleItem.name }}
@@ -95,18 +95,21 @@ import { onMounted, ref } from "vue";
 import { useAuthStore } from "../../stores/auth";
 import { useRoleStore } from "../../stores/role";
 import { useUserStore } from "../../stores/user";
+import type { RoleModel } from "./../../model/roleModel";
 
 const userStore = useUserStore();
 const authStore = useAuthStore();
 const roleStore = useRoleStore();
 
-const myModal = ref(null);
+const myModal = ref<HTMLDialogElement | null>(null);
 
-const name = ref(null);
-const username = ref(null);
-const password = ref(null);
-const role = ref([]);
-const selectedRole = ref("");
+const name = ref("");
+const username = ref("");
+const password = ref("");
+
+
+const role = ref<RoleModel[]>([]);
+const selectedRole = ref(0);
 
 onMounted(async () => {
   await roleStore.getRoles();
@@ -115,11 +118,17 @@ onMounted(async () => {
 
 const showModal = () => {
   console.log("Show modal");
-  myModal.value.show();
+  // myModal.value.show(); 
+  if (myModal.value) {
+    myModal.value.show();
+  }
 };
 
 const closeModal = () => {
-  myModal.value.close();
+  // myModal.value.close();
+  if (myModal.value) {
+    myModal.value.close();
+  }
 };
 
 const handleSubmit = async () => {

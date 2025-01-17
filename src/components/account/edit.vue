@@ -70,7 +70,7 @@ const userStore = useUserStore();
 const authStore = useAuthStore();
 
 const open = ref(false);
-const myModal = ref(null);
+const myModal = ref<HTMLDialogElement | null>(null);
 
 const accountNo = ref("");
 const userId = ref(0);
@@ -94,11 +94,16 @@ const showModal = () => {
   accountNo.value = props.account.accountNo;
   userId.value = props.account.userId;
 
-  myModal.value.show();
+  if (myModal.value) {
+    myModal.value.show();
+  }
 };
 
 const closeModal = () => {
-  myModal.value.close();
+  // myModal.value.close();
+  if (myModal.value) {
+    myModal.value.close();
+  }
 };
 
 const handleSubmit = async () => {
