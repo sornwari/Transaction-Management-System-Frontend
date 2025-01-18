@@ -2,10 +2,10 @@ import { createWebHistory, createRouter } from "vue-router";
 import Cookies from "js-cookie";
 import Auth from "@/pages/Auth.vue";
 // import Auth from "./../pages/auth.vue";
-import Main from "./../pages/main.vue";
-import User from "./../pages/user.vue";
-import Transaction from "./../pages/transaction.vue";
-import Account from "./../pages/account.vue";
+import Main from "./../pages/Main.vue";
+import User from "./../pages/User.vue";
+import Transaction from "./../pages/Transaction.vue";
+import Account from "./../pages/Account.vue";
 import Dashboard from "./../pages/dashboard.vue";
 
 const routes = [

@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import settings from '@/components/setting/setting.vue';
+import settings from '@/components/setting/Setting.vue';
 
 </script>
 
